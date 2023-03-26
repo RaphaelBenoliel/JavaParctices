@@ -1,12 +1,13 @@
 package lab2;
 
 public class Rational {
-    private int numerator;
-    private int denominator;
+    private final int numerator;
+    private final int denominator;
 
     public Rational(int num, int deno) {
-        this.numerator = num;
-        this.denominator = deno;
+        int reduced = gcd(num,deno);
+        this.numerator = num / reduced;
+        this.denominator = deno / reduced;
     }
 
     public Rational divide(Rational other) {
@@ -24,7 +25,18 @@ public class Rational {
     }
 
     public Rational minus(Rational other) {
-        return res;
+        return new Rational(numerator * other.denominator - other.numerator * denominator,
+                denominator * other.denominator);
+    }
+    public Rational plus(Rational other) {
+        return new Rational(numerator * other.denominator + other.numerator * denominator,
+                denominator * other.denominator);
+    }
+    private int gcd(int a, int b) {
+        if (b == 0) {
+            return a;
+        }
+        return gcd(b, a % b);
     }
 
     @Override

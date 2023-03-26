@@ -5,7 +5,7 @@ public class IntLinkedList {
     private int size;
 
     private class Node {
-        private int data;
+        private final int data;
         private Node next;
 
         public Node(int data) {
